@@ -95,7 +95,7 @@ nav>a {
 import ContactComponent from "../components/ContactComponent.vue"
 import DonateComponent from "../components/DonateComponent.vue"
 import IndexComponent from "../components/IndexComponent.vue"
-//import axios from "axios"
+import axios from "axios"
 
 export default {
     data() {
@@ -135,8 +135,7 @@ export default {
                     'sec-ch-ua-platform': '"Windows"'
                 }
             };
-            console.log(config)
-            /*axios.request(config).then((result) => {
+            axios.request(config).then((result) => {
                 if (result.data.title.includes("-")) {
                     this.currentArtist = result.data.title.split("-")[0]
                     this.currentSong = result.data.title.split("-")[1]
@@ -144,7 +143,7 @@ export default {
                     this.currentArtist = 'Intro';
                     this.currentSong = result.data.title;
                 }
-            })*/
+            })
         },
         switchPage(component) {
             this.currentPage = component
