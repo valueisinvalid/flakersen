@@ -120,7 +120,7 @@ export default {
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: '"https://zenoplay.zenomedia.com/api/zenofm/nowplaying/flakersen?_=' + new Date().getTime()
+                url: 'https://zenoplay.zenomedia.com/api/zenofm/nowplaying/flakersen?_=' + new Date().getTime()
             };
             axios.request(config).then((result) => {
                 if (result.data.title.includes("-")) {
