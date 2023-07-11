@@ -120,7 +120,7 @@ export default {
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: 'https://flakersen-0bf9150bba87.herokuapp.com/https://zenoplay.zenomedia.com/api/zenofm/nowplaying/zxf2icpossouv',
+                url: 'https://zenoplay.zenomedia.com/api/zenofm/nowplaying/zxf2icpossouv',
                 headers: {
                     'Accept': '*/*',
                     'Accept-Language': 'en,en-GB;q=0.9,tr;q=0.8,eo;q=0.7,bs;q=0.6',
