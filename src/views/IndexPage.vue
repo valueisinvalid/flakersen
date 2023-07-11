@@ -117,7 +117,24 @@ export default {
     },
     methods: {
         updateSong() {
-            axios.get('https://zenoplay.zenomedia.com/api/zenofm/nowplaying/zxf2icpossouv?_=1689112314480').then((result) => {
+            let config = {
+                method: 'get',
+                maxBodyLength: Infinity,
+                url: 'https://zenoplay.zenomedia.com/api/zenofm/nowplaying/zxf2icpossouv?_=1689112314480',
+                headers: {
+                    "accept": "application/json, text/javascript, */*; q=0.01",
+                    "accept-language": "en,en-GB;q=0.9,tr;q=0.8,eo;q=0.7,bs;q=0.6",
+                    "sec-ch-ua": "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\"",
+                    "sec-ch-ua-mobile": "?0",
+                    "sec-ch-ua-platform": "\"Windows\"",
+                    "sec-fetch-dest": "empty",
+                    "sec-fetch-mode": "cors",
+                    "sec-fetch-site": "cross-site",
+                    "Referer": "https://zeno.fm/player/flakersen",
+                    "Referrer-Policy": "no-referrer-when-downgrade"
+                }
+            };
+            axios.request(config).then((result) => {
                 if (result.data.title.includes("-")) {
                     this.currentArtist = result.data.title.split("-")[0]
                     this.currentSong = result.data.title.split("-")[1]
