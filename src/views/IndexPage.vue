@@ -120,12 +120,13 @@ export default {
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: 'https://zenoplay.zenomedia.com/api/zenofm/nowplaying/zxf2icpossouv',
+                url: 'https://zenoplay.zenomedia.com/api/zenofm/nowplaying/zxf2icpossouv?_=1689112314480',
                 headers: {
-                    'Accept': '*/*',
+                    'Accept': 'application/json, text/javascript, */*; q=0.01',
                     'Accept-Language': 'en,en-GB;q=0.9,tr;q=0.8,eo;q=0.7,bs;q=0.6',
                     'Connection': 'keep-alive',
-                    'Origin': 'null',
+                    'Origin': 'https://zeno.fm',
+                    'Referer': 'https://zeno.fm/player/flakersen',
                     'Sec-Fetch-Dest': 'empty',
                     'Sec-Fetch-Mode': 'cors',
                     'Sec-Fetch-Site': 'cross-site',
@@ -148,7 +149,7 @@ export default {
         switchPage(component) {
             this.currentPage = component
         },
-        toggleAudio() {}
+        toggleAudio() { }
     },
     created() {
         this.updateSong()
