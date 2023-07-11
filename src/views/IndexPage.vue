@@ -1,5 +1,4 @@
 <template>
-    <audio controls="" id="audioPlayer" style="display: none" autoplay></audio>
     <div class="container">
         <div class="header">
             <span class="welcome"><a style="cursor:pointer" @click="switchPage('IndexComponent')"
@@ -15,8 +14,8 @@
 
         <div class="footer">
             <div class="player">
-                <span class="toggle" @click="toggleAudio()" v-html="playerState == true ? on : off"></span>
-                <span>{{ currentArtist + " - " + currentSong }}</span>
+                <iframe src="https://zeno.fm/player/flakersen" ref="playerFrame" id="player" width="400" height="100"
+                    frameborder="0" scrolling="no"></iframe>
             </div>
             <div class="copyright">
                 powered by <br>
@@ -36,7 +35,7 @@
     font-family: Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    user-select: none;
+    cursor: url(https://cur.cursors-4u.net/cursors/cur-6/cur568.cur), auto !important;
     letter-spacing: -.04em;
 }
 
@@ -88,14 +87,18 @@ nav>a {
     font-size: 1.25rem;
 }
 
-.footer>.player {}
+@media only screen and (max-width:1350px) {
+    :root {
+        --padding-x:50px;
+        --padding-y:130px;
+    }
+}
 </style>
 
 <script>
 import ContactComponent from "../components/ContactComponent.vue"
 import DonateComponent from "../components/DonateComponent.vue"
 import IndexComponent from "../components/IndexComponent.vue"
-import axios from "axios"
 
 export default {
     data() {
@@ -103,9 +106,6 @@ export default {
             currentSong: '',
             currentArtist: '',
             currentPage: IndexComponent,
-            on: `<svg width="40" height="51" viewBox="0 0 40 51" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H15V51H0V0Z" fill="#000000"/><path d="M25 0H40V51H25V0Z" fill="#000000"/></svg>`,
-            off: `<svg width="44" height="51" viewBox="0 0 44 51" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M44 25.4034L-6.03553e-06 50.8068L-3.8147e-06 -1.9233e-06L44 25.4034Z" fill="#111111"/></svg>`,
-            playerState: true,
         };
     },
     components: {
@@ -116,34 +116,23 @@ export default {
     computed: {
     },
     methods: {
-        updateSong() {
-            let config = {
-                method: 'get',
-                maxBodyLength: Infinity,
-                url: 'https://zenoplay.zenomedia.com/api/zenofm/nowplaying/zxf2icpossouv?_=' + new Date().getTime()
-            };
-            axios.request(config).then((result) => {
-                if (result.data.title.includes("-")) {
-                    this.currentArtist = result.data.title.split("-")[0]
-                    this.currentSong = result.data.title.split("-")[1]
-                } else {
-                    this.currentArtist = 'Intro';
-                    this.currentSong = result.data.title;
-                }
-            })
-        },
         switchPage(component) {
             this.currentPage = component
-        },
-        toggleAudio() { }
+        }
     },
-    created() {
-        this.updateSong()
-    },
-    mounted: function () {
-        setInterval(function () {
-            this.updateSong()
-        }.bind(this), 5000)
+    mounted() {
+        const iframe = this.$refs.playerFrame;
+
+        iframe.addEventListener('load', () => {
+            const iframeContent = iframe.contentWindow.document;
+            const elementsToRemove = iframeContent.getElementsByClassName('dashboard-header');
+
+            if (elementsToRemove.length > 0) {
+                const elementToRemove = elementsToRemove[0];
+                elementToRemove.remove();
+            }
+        });
     }
+
 };
 </script>
