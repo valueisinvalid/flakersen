@@ -14,7 +14,7 @@
 
         <div class="footer">
             <div class="player">
-                <iframe src="https://zeno.fm/player/flakersen" ref="playerFrame" id="player" width="400" height="100"
+                <iframe src="https://zeno.fm/player/flakersen" ref="playerFrame" id="player" width="550" height="100"
                     frameborder="0" scrolling="no"></iframe>
             </div>
             <div class="copyright">
